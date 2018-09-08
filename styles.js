@@ -24,12 +24,12 @@ export const FONTS = {
 
 export const SHADOWS = {
   vertical: {
-    shadowColor: RAISIN_BLACK,
+    shadowColor: DAVYS_GREY,
     shadowOffset: {
-      width: 0, height: 4
+      width: 0, height: -0.3
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 4
+    shadowOpacity: 0.3,
+    shadowRadius: 1.3
   }
 }
 
@@ -45,10 +45,9 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    margin: 20
   },
   card : {
-    flex: 4,
+    minHeight:420,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: WHITE,
