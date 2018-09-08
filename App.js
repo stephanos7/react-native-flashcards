@@ -10,9 +10,9 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Card/>
-        <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-          <ActionButton type="correct" />
+        <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between", margin:30}}>
           <ActionButton type="incorrect" />
+          <ActionButton type="correct" />
         </View>
       </View>
     );

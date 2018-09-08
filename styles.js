@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 
-export const RASBERRY_PINK = "E56399";
+export const RASBERRY_PINK = "#E56399";
 export const TUBMLEWEED = "D3A588";
 export const ALMOND = "#ECE2D0";
 export const PEARL_AQUA = "#7FD1B9";
@@ -39,7 +39,8 @@ export default StyleSheet.create({
     justifyContent:"center",
     borderRadius:50,
     width:60,
-    height:60
+    height:60,
+    paddingTop:5
   },
   container: {
     flex: 1,
@@ -52,7 +53,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: WHITE,
     borderRadius: 35,
-    marginBottom: 35,
     ...SHADOWS.vertical
   },
   question:{

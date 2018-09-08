@@ -2,14 +2,27 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 
-import styles, {PEARL_AQUA} from "../styles";
+import styles, {PEARL_AQUA, RASBERRY_PINK, FONTS} from "../styles";
 
 export default class ActionButton extends React.Component {
+  state = {
+    style: null,
+    name: null
+  }
+
+  componentDidMount(){
+    const [style, name] = (this.props.type === "correct") ? [{backgroundColor:PEARL_AQUA}, "ios-checkmark"]
+              : (this.props.type === "incorrect") ? [{backgroundColor:RASBERRY_PINK}, "ios-close-outline"]
+                : [null, null];
+
+    this.setState({style});
+    this.setState({name});
+  }
+
   render(){
-    const type = this.props;
     return(
-      <TouchableOpacity style={[styles.actionButton, {backgroundColor:PEARL_AQUA}]}>
-        <Ionicons name="ios-checkmark" color="white" size={48} />
+      <TouchableOpacity style={[styles.actionButton, {...this.state.style}]}>
+        <Ionicons name={this.state.name} color="white" size={40} />
       </TouchableOpacity>
     )
   }
