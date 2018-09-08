@@ -1,14 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-export const _COLORS = {
-  RASBERRY_PINK : "E56399",
-  TUBMLEWEED: "D3A588",
-  ALMOND: "#ECE2D0",
-  PEARL_AQUA: "#7FD1B9",
-  RAISIN_BLACK: "#2D2524",
-  DAVYS_GREY: "#5A5A5A",
-  WHITE: "#FFF"
-}
+
+export const RASBERRY_PINK = "E56399";
+export const TUBMLEWEED = "D3A588";
+export const ALMOND = "#ECE2D0";
+export const PEARL_AQUA = "#7FD1B9";
+export const RAISIN_BLACK = "#2D2524";
+export const DAVYS_GREY = "#5A5A5A";
+export const WHITE = "#FFF";
 
 export const LAYOUTS = {
   
@@ -25,7 +24,7 @@ export const FONTS = {
 
 export const SHADOWS = {
   vertical: {
-    shadowColor: _COLORS.RAISIN_BLACK,
+    shadowColor: RAISIN_BLACK,
     shadowOffset: {
       width: 0, height: 4
     },
@@ -35,6 +34,13 @@ export const SHADOWS = {
 }
 
 export default StyleSheet.create({
+  actionButton:{
+    alignItems:"center",
+    justifyContent:"center",
+    borderRadius:50,
+    width:60,
+    height:60
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -44,13 +50,13 @@ export default StyleSheet.create({
     flex: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: _COLORS.WHITE,
+    backgroundColor: WHITE,
     borderRadius: 35,
     marginBottom: 35,
     ...SHADOWS.vertical
   },
   question:{
-    color: _COLORS.DAVYS_GREY,
+    color: DAVYS_GREY,
     ...FONTS.h1
   },
 });

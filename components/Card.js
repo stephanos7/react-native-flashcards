@@ -2,9 +2,6 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import styles from "../styles";
-import FONTS from "../styles";
-import {COLORS} from "../styles";
-
 
 export default class Card extends React.Component {
   render() {
