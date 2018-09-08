@@ -1,16 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const LAYOUTS = {
-  
-}
-
-export const FONTS = {
-  h1: {
-    fontSize: 32
-  }
-}
-
-export const COLORS = {
+export const _COLORS = {
   RASBERRY_PINK : "E56399",
   TUBMLEWEED: "D3A588",
   ALMOND: "#ECE2D0",
@@ -20,14 +10,27 @@ export const COLORS = {
   WHITE: "#FFF"
 }
 
+export const LAYOUTS = {
+  
+}
+
+export const FONTS = {
+  h1: {
+    fontSize: 32
+  },
+  h2: {
+    fontSize: 28
+  }
+}
+
 export const SHADOWS = {
   vertical: {
-    shadowColor: COLORS.RAISIN_BLACK,
+    shadowColor: _COLORS.RAISIN_BLACK,
     shadowOffset: {
-      width: 0, height: 6
+      width: 0, height: 4
     },
-    shadowOpacity: 0.4,
-    shadowRadius: 6
+    shadowOpacity: 0.2,
+    shadowRadius: 4
   }
 }
 
@@ -41,12 +44,13 @@ export default StyleSheet.create({
     flex: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: _COLORS.WHITE,
     borderRadius: 35,
+    marginBottom: 35,
     ...SHADOWS.vertical
   },
   question:{
-    color: COLORS.DAVYS_GREY,
+    color: _COLORS.DAVYS_GREY,
     ...FONTS.h1
-  }
+  },
 });
