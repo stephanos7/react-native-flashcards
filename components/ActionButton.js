@@ -10,6 +10,10 @@ export default class ActionButton extends React.Component {
     name: null
   }
 
+  handlePress = () => {
+    this.props.popArray();
+  }
+
   componentDidMount(){
     const [style, name] = (this.props.type === "correct") ? [{backgroundColor:PEARL_AQUA}, "ios-checkmark"]
               : (this.props.type === "incorrect") ? [{backgroundColor:RASBERRY_PINK}, "ios-close-outline"]
@@ -21,7 +25,7 @@ export default class ActionButton extends React.Component {
 
   render(){
     return(
-      <TouchableOpacity style={[styles.actionButton, {...this.state.style}]}>
+      <TouchableOpacity style={[styles.actionButton, {...this.state.style}]} onPress={this.handlePress}>
         <Ionicons name={this.state.name} color="white" size={40} />
       </TouchableOpacity>
     )

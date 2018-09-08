@@ -10,6 +10,12 @@ export default class App extends React.Component {
     data:["apple","orange","lemon"]
   }
 
+  popArray = () => {
+    const copyOfData = [...this.state.data];
+    copyOfData.pop();
+    this.setState(() => ({data:copyOfData}));
+  }
+
   _renderItem = (item) => <Card {...item}/>
 
   render() {
@@ -23,7 +29,7 @@ export default class App extends React.Component {
             />
         <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between", margin:30}}>
           <ActionButton type="incorrect" />
-          <ActionButton type="correct" />
+          <ActionButton type="correct" data={this.state.data} popArray={this.popArray} />
         </View>
       </View>
     );
