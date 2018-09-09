@@ -16,20 +16,20 @@ export default class Card extends React.Component {
     this.swipeCardAnimation();
   }
 
-  determineSwipeDirection = (attempt, startValue) => {
+  determineSwipeConfig = (attempt, startValue, answer) => {
     return Animated.timing(
       startValue,
       {
         toValue: attempt === "correct" ? 400 : attempt === "incorrect" ? -400 : null,
-        duration:500
+        duration:attempt === answer ? 500 : 3000
       }
     )
   }
 
   swipeCardAnimation = () => {
-    const { attempted } = this.props.item;
+    const { attempted, answer } = this.props.item;
     const sequence = [
-      this.determineSwipeDirection(attempted, this.x),
+      this.determineSwipeConfig(attempted, this.x, answer),
       Animated.timing(
         this.dotOpacity,
         {
