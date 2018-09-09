@@ -32,7 +32,7 @@ export default class Card extends React.Component {
       outputRange: ['0deg', '45deg']
     })
     return (
-      <Animated.View style={[styles.card, {width:"100%", position:"absolute", top:0, left:x, transform: [{rotate: rotation}], alignSelf:"center", marginTop:(index+1)*8}]}>
+      <Animated.View style={[styles.card, {alignSelf:"center", width: "100%", position:"absolute", top:0, left:x, transform: [{rotate: rotation}], marginTop:(index+1)*8}]}>
         <Text style={styles.question}>{this.props.item.question}</Text>
       </Animated.View>
     );

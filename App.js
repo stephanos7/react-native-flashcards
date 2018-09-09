@@ -7,7 +7,20 @@ import ActionButton from './components/ActionButton';
 
 export default class App extends React.Component {
   state = {
-    data:[{question:"JavaScript was being developed under the name Mocha.", attempted:false},{question:"orange",attempted:false},{question:"lemon", attempted:false}],
+    data:[
+      {
+        question:"JavaScript was being developed under the name Mocha.",
+        attempted:false,
+      },
+      {
+        question:"orange",
+        attempted:false
+      },
+      {
+        question:"lemon",
+        attempted:false
+      }
+    ],
   }
 
   markCardAttempted = (props) => {

@@ -5,6 +5,7 @@ export const RASBERRY_PINK = "#E56399";
 export const TUBMLEWEED = "D3A588";
 export const ALMOND = "#ECE2D0";
 export const PEARL_AQUA = "#7FD1B9";
+export const NON_PHOTO_BLUE = "#90E5ED";
 export const RAISIN_BLACK = "#2D2524";
 export const DAVYS_GREY = "#5A5A5A";
 export const WHITE = "#FFF";
