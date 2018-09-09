@@ -10,25 +10,10 @@ export default class App extends React.Component {
     data:[{question:"apples", attempted:false},{question:"orange",attempted:false},{question:"lemon", attempted:false}],
   }
 
-  // popArray = () => {
-  //   // const copyOfData = [...this.state.data];
-  //   // copyOfData.pop();
-  //   // this.setState(() => ({data:copyOfData}));
-  // }
-
-
-
-  // attemptItem = async () => {
-  //   const copyOfData = [...this.state.data];
-  //   const targetItem = copyOfData.pop();
-  //   targetItem.attempted = true;
-  //   await copyOfData.push(targetItem);
-  //   this.setState(() => ({data:copyOfData}));
-  // }
-
   markCardAttempted = (props) => {
     const {data} = props;
     data.attempted = true;
+    console.log("when changing to true: ", JSON.stringify(data))
     this.updateData(data);
   }
 
@@ -36,7 +21,7 @@ export default class App extends React.Component {
     const copyOfStateData = [...this.state.data];
     copyOfStateData.reverse();
     copyOfStateData.splice(cardData.index, 1, cardData);
-    this.setState({data:copyOfStateData});
+    this.setState( () => ({data:copyOfStateData}));
   }
 
   _renderItem = (item) => <Card animateSucces={this.animateSucces} {...item}/>
