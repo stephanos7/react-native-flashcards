@@ -39,9 +39,10 @@ export default class App extends React.Component {
 
   updateData = (cardData) => {
     const copyOfStateData = [...this.state.data];
-    copyOfStateData.reverse();
-    copyOfStateData.splice(cardData.index, 1, cardData);
-    this.setState( () => ({data:copyOfStateData}));
+    const removeLastVerstionOfItem = copyOfStateData.filter( item => item.question !== cardData.question)
+    const addLatestVersionOfItem = removeLastVerstionOfItem.concat(cardData);
+    this.setState( () => ({data:copyOfStateData}), () => console.log(this.state));
+    
   }
 
   _renderItem = (item) => <Card {...item}
@@ -49,12 +50,12 @@ export default class App extends React.Component {
                                 removeAttemptedCard={this.removeAttemptedCard} />
   render() {
     const copyOfData = [...this.state.data];
-    const headCard = copyOfData.shift();
+    const headCard = copyOfData.pop();
     return (
       <View style={styles.container}>
         <FlatList
             style={{padding:30}}
-            data={this.state.data.reverse()}
+            data={this.state.data}
             renderItem={this._renderItem}
             keyExtractor={(item,index)=> index.toString()}
             />
