@@ -14,12 +14,12 @@ export default class App extends React.Component {
         answer: "correct"
       },
       {
-        question:"orange",
+        question:"JavaScript was created in 100 days only.",
         attempted:"",
         answer: "incorrect"
       },
       {
-        question:"lemon",
+        question:"JavaScript doesn’t have an integer data type.",
         attempted:"",
         answer: "correct"
       }

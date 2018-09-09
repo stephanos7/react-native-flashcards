@@ -80,6 +80,7 @@ export default StyleSheet.create({
     textAlign: "center"
   },
   question: {
+    padding:20,
     ...FONTS.h2
   },
   radialAnimationDot: {
