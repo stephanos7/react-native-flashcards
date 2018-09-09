@@ -63,6 +63,17 @@ export default StyleSheet.create({
     borderRadius: 35,
     ...SHADOWS.vertical
   },
+  endOfDeckContainer: {
+    minHeight: 420,
+    alignItems: "center",
+    justifyContent: "center",
+    padding:30
+  },
+  endOfDecktText:{
+    color: DAVYS_GREY,
+    ...FONTS.h2,
+    textAlign: "center"
+  },
   question:{
     color: DAVYS_GREY,
     ...FONTS.h2

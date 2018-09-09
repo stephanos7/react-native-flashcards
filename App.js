@@ -41,29 +41,44 @@ export default class App extends React.Component {
     const copyOfStateData = [...this.state.data];
     const removeLastVerstionOfItem = copyOfStateData.filter( item => item.question !== cardData.question)
     const addLatestVersionOfItem = removeLastVerstionOfItem.concat(cardData);
-    this.setState( () => ({data:copyOfStateData}), () => console.log(this.state));
+    this.setState(() => ({data:copyOfStateData}), () => console.log(this.state));
     
+  }
+
+  renderEndOfDeck = () => {
+    return(
+      <View style={styles.endOfDeckContainer}>
+        <Text style={styles.endOfDecktText}>No more cards!😔</Text>
+      </View>  
+    )
   }
 
   _renderItem = (item) => <Card {...item}
                                 animateSucces={this.animateSucces}
                                 removeAttemptedCard={this.removeAttemptedCard} />
   render() {
+    const {data} = this.state
     const copyOfData = [...this.state.data];
     const headCard = copyOfData.pop();
     return (
-      <View style={styles.container}>
-        <FlatList
-            style={{padding:30}}
-            data={this.state.data}
-            renderItem={this._renderItem}
-            keyExtractor={(item,index)=> index.toString()}
-            />
+      <View style={[styles.container, {justifyContent:"space-between"}]}>
+        {data.length !== 0 ? 
+          <FlatList
+              style={{padding:30}}
+              data={this.state.data}
+              renderItem={this._renderItem}
+              keyExtractor={(item,index)=> index.toString()}
+              />
+        : this.renderEndOfDeck() }
         <View style={styles.buttonsContainer}>
-          <ActionButton type="incorrect" data={headCard} attemptCard={this.attemptCard} />
+          <ActionButton type="incorrect" 
+                        data={headCard} 
+                        attemptCard={this.attemptCard}
+                        handleEndOfDeck={this.handleEndOfDeck} />
           <ActionButton type="correct" 
                         data={headCard} 
-                        attemptCard={this.attemptCard} />
+                        attemptCard={this.attemptCard}
+                        handleEndOfDeck={this.handleEndOfDeck} />
         </View>
       </View>
     );

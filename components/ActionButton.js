@@ -11,8 +11,10 @@ export default class ActionButton extends React.Component {
   }
 
   handlePress = (userResponse) => {
-    const {data} = this.props
-    this.props.attemptCard(data, userResponse);
+    if(this.props.data){
+      const {data} = this.props
+      this.props.attemptCard(data, userResponse);
+    }
   }
 
   componentDidMount(){
