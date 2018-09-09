@@ -9,18 +9,24 @@ export default class Card extends React.Component {
   }
 
   componentDidUpdate() {
-    this.props.item.attempted === true && 
+    this.props.item.attempted !== "" && 
     this.dropCardAnimation();
   }
 
-  dropCardAnimation = () => {
+  determineSwipeDirection = (attempt, startValue) => {
     Animated.timing(
-      this.state.x,
+      startValue,
       {
-        toValue: 400,
+        toValue: attempt === "correct" ? 400 : attempt === "incorrect" ? -400 : null,
         duration:350
       }
     ).start();
+  }
+
+  dropCardAnimation = () => {
+    const { x } = this.state;
+    const { attempted } = this.props.item;
+    this.determineSwipeDirection(attempted, x);
   }
 
   render() {

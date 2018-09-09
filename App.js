@@ -10,23 +10,22 @@ export default class App extends React.Component {
     data:[
       {
         question:"JavaScript was being developed under the name Mocha.",
-        attempted:false,
+        attempted:"",
       },
       {
         question:"orange",
-        attempted:false
+        attempted:""
       },
       {
         question:"lemon",
-        attempted:false
+        attempted:""
       }
     ],
   }
 
   markCardAttempted = (props) => {
     const {data} = props;
-    data.attempted = true;
-    console.log("when changing to true: ", JSON.stringify(data))
+    data.attempted = "correct";
     this.updateData(data);
   }
 
