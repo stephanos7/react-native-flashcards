@@ -21,7 +21,7 @@ export default class Card extends React.Component {
       startValue,
       {
         toValue: attempt === "correct" ? 400 : attempt === "incorrect" ? -400 : null,
-        duration:attempt === answer ? 500 : 3000
+        duration: attempt !== answer ? 2000 : 500
       }
     )
   }
