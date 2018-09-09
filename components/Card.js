@@ -4,8 +4,9 @@ import { Text, View, Animated } from 'react-native';
 import styles from "../styles";
 
 export default class Card extends React.Component {
-  state = {
-    x: new Animated.Value(0),
+
+  componentWillMount(){
+    this.x = new Animated.Value(0);
   }
 
   componentDidUpdate() {
@@ -24,21 +25,18 @@ export default class Card extends React.Component {
   }
 
   dropCardAnimation = () => {
-    const { x } = this.state;
     const { attempted } = this.props.item;
-    this.determineSwipeDirection(attempted, x);
+    this.determineSwipeDirection(attempted, this.x);
   }
 
   render() {
-    const {opacity} = this.state;
     const {index} = this.props;
-    const {x} = this.state;
-    const rotation = x.interpolate({
+    const rotation = this.x.interpolate({
       inputRange: [0, 200],
       outputRange: ['0deg', '45deg']
     })
     return (
-      <Animated.View style={[styles.card, {alignSelf:"center", width: "100%", position:"absolute", top:0, left:x, transform: [{rotate: rotation}], marginTop:(index+1)*8}]}>
+      <Animated.View style={[styles.card, {alignSelf:"center", width: "100%", position:"absolute", top:0, left:this.x, transform: [{rotate: rotation}], marginTop:(index+1)*8}]}>
         <Text style={styles.question}>{this.props.item.question}</Text>
       </Animated.View>
     );
