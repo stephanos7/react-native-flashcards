@@ -7,26 +7,39 @@ export default class Card extends React.Component {
 
   componentWillMount(){
     this.x = new Animated.Value(0);
+    this.dotOpacity = new Animated.Value(0);
   }
 
   componentDidUpdate() {
     this.props.item.attempted !== "" && 
-    this.dropCardAnimation();
+    this.swipeCardAnimation();
   }
 
   determineSwipeDirection = (attempt, startValue) => {
-    Animated.timing(
+    return Animated.timing(
       startValue,
       {
         toValue: attempt === "correct" ? 400 : attempt === "incorrect" ? -400 : null,
         duration:350
       }
-    ).start(() => this.props.removeAttemptedCard());
+    )
   }
 
-  dropCardAnimation = () => {
+  // .start((
+
+  swipeCardAnimation = () => {
     const { attempted } = this.props.item;
-    this.determineSwipeDirection(attempted, this.x);
+    const sequence = [
+      this.determineSwipeDirection(attempted, this.x),
+      Animated.timing(
+        this.dotOpacity,
+        {
+          toValue: 1,
+          duration:350
+        }
+      )
+    ];
+    Animated.parallel(sequence).start(() => this.props.removeAttemptedCard());
   }
 
   render() {
@@ -38,6 +51,7 @@ export default class Card extends React.Component {
     return (
       <Animated.View style={[styles.card, {alignSelf:"center", width: "100%", position:"absolute", top:0, left:this.x, transform: [{rotate: rotation}], marginTop:(index+1)*8}]}>
         <Text style={styles.question}>{this.props.item.question}</Text>
+        <Animated.View style={{width:50,height:50,backgroundColor:"grey", opacity:this.dotOpacity}}/>
       </Animated.View>
     );
   }

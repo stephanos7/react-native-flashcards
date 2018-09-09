@@ -41,7 +41,7 @@ export default class App extends React.Component {
     const copyOfStateData = [...this.state.data];
     const removeLastVerstionOfItem = copyOfStateData.filter( item => item.question !== cardData.question)
     const addLatestVersionOfItem = removeLastVerstionOfItem.concat(cardData);
-    this.setState(() => ({data:copyOfStateData}), () => console.log(this.state));
+    this.setState(() => ({data:copyOfStateData}));
     
   }
 
