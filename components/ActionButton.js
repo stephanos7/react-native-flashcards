@@ -7,11 +7,11 @@ import styles, {PEARL_AQUA, RASBERRY_PINK, FONTS} from "../styles";
 export default class ActionButton extends React.Component {
   state = {
     style: null,
-    name: null
+    name: null,
   }
 
   handlePress = () => {
-    this.props.popArray();
+    alert(JSON.stringify(this.props))
   }
 
   componentDidMount(){

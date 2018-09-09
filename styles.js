@@ -56,6 +56,6 @@ export default StyleSheet.create({
   },
   question:{
     color: DAVYS_GREY,
-    ...FONTS.h1
+    ...FONTS.h2
   },
 });
