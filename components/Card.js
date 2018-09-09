@@ -5,7 +5,7 @@ import styles from "../styles";
 
 export default class Card extends React.Component {
   state = {
-    y: new Animated.Value(0),
+    x: new Animated.Value(0),
   }
 
   componentDidUpdate() {
@@ -15,10 +15,10 @@ export default class Card extends React.Component {
 
   dropCardAnimation = () => {
     Animated.timing(
-      this.state.y,
+      this.state.x,
       {
-        toValue: 500,
-        duration:2000
+        toValue: 400,
+        duration:350
       }
     ).start();
   }
@@ -26,11 +26,14 @@ export default class Card extends React.Component {
   render() {
     const {opacity} = this.state;
     const {index} = this.props;
-    const {y} = this.state;
+    const {x} = this.state;
+    const rotation = x.interpolate({
+      inputRange: [0, 200],
+      outputRange: ['0deg', '45deg']
+    })
     return (
-      <Animated.View style={[styles.card, {width:"100%", position:"absolute", top:y, alignSelf:"center", marginTop:(index+1)*8}]}>
+      <Animated.View style={[styles.card, {width:"100%", position:"absolute", top:0, left:x, transform: [{rotate: rotation}], alignSelf:"center", marginTop:(index+1)*8}]}>
         <Text style={styles.question}>{this.props.item.question}</Text>
-        <Text>{JSON.stringify(this.props)}</Text>
       </Animated.View>
     );
   }

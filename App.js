@@ -7,7 +7,7 @@ import ActionButton from './components/ActionButton';
 
 export default class App extends React.Component {
   state = {
-    data:[{question:"apples", attempted:false},{question:"orange",attempted:false},{question:"lemon", attempted:false}],
+    data:[{question:"JavaScript was being developed under the name Mocha.", attempted:false},{question:"orange",attempted:false},{question:"lemon", attempted:false}],
   }
 
   markCardAttempted = (props) => {
@@ -31,7 +31,6 @@ export default class App extends React.Component {
     const headCard = copyOfData.shift();
     return (
       <View style={styles.container}>
-      <Text>{JSON.stringify(this.state.data)}</Text>
         <FlatList
             style={{padding:30}}
             data={this.state.data.reverse()}

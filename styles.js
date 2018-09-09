@@ -29,7 +29,7 @@ export const SHADOWS = {
       width: 0, height: -0.3
     },
     shadowOpacity: 0.3,
-    shadowRadius: 1.3
+    shadowRadius: 1.6
   }
 }
 
