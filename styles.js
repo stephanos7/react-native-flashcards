@@ -9,6 +9,7 @@ export const NON_PHOTO_BLUE = "#90E5ED";
 export const RAISIN_BLACK = "#2D2524";
 export const DAVYS_GREY = "#5A5A5A";
 export const WHITE = "#FFF";
+export const RUSTY_RED = "#DB2B39";
 
 export const LAYOUTS = {
   
@@ -73,12 +74,17 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding:30
   },
-  endOfDecktText:{
+  endOfDecktText: {
     color: DAVYS_GREY,
     ...FONTS.h2,
     textAlign: "center"
   },
-  question:{
+  question: {
     ...FONTS.h2
   },
+  radialAnimationDot: {
+    borderRadius:50,
+    width:10,
+    height:10
+  }
 });

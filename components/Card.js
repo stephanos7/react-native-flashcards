@@ -1,7 +1,7 @@
 import React, {shallowCompare} from 'react';
 import { Text, View, Animated } from 'react-native';
 
-import styles,{DAVYS_GREY,PEARL_AQUA} from "../styles";
+import styles,{DAVYS_GREY,PEARL_AQUA,RUSTY_RED} from "../styles";
 
 export default class Card extends React.Component {
 
@@ -21,7 +21,7 @@ export default class Card extends React.Component {
       startValue,
       {
         toValue: attempt === "correct" ? 400 : attempt === "incorrect" ? -400 : null,
-        duration: attempt !== answer ? 2000 : 500
+        duration: attempt !== answer ? 1000 : 400
       }
     )
   }
@@ -42,7 +42,7 @@ export default class Card extends React.Component {
         {
           toValue:60,
           tension:50,
-          duration:2000
+          duration:600
         }
       )
     ];
@@ -62,7 +62,7 @@ export default class Card extends React.Component {
     return (
       <Animated.View style={[styles.card, item.attempted !== "" && this.hideOverflow(), {left:this.x, transform: [{rotate: rotation}], marginTop:(index+1)*8}]}>
         <Text style={[styles.question, item.attempted !== "" ? {color:"white",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Text>
-        <Animated.View style={{transform:[{scale:this.dotScale}],borderRadius:50,width:10,height:10,backgroundColor:PEARL_AQUA, opacity:this.dotOpacity}}/>
+        <Animated.View style={[styles.radialAnimationDot,item.attempted !== item.answer? {backgroundColor:RUSTY_RED} :{backgroundColor:PEARL_AQUA},{ transform:[{scale:this.dotScale}], opacity:this.dotOpacity}]}/>
       </Animated.View>
     );
   }
