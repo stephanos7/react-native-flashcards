@@ -37,7 +37,7 @@ export default class App extends React.Component {
             renderItem={this._renderItem}
             keyExtractor={(item,index)=> index.toString()}
             />
-        <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between", margin:30}}>
+        <View style={styles.buttonsContainer}>
           <ActionButton type="incorrect" />
           <ActionButton type="correct" data={headCard} markCardAttempted={this.markCardAttempted} />
         </View>

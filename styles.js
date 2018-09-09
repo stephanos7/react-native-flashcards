@@ -42,6 +42,14 @@ export default StyleSheet.create({
     height:60,
     paddingTop:5
   },
+  buttonsContainer: {
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    margin:40,
+    paddingLeft:40,
+    paddingRight:40
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
