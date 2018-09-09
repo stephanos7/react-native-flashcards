@@ -11,7 +11,7 @@ export default class ActionButton extends React.Component {
   }
 
   handlePress = () => {
-    alert(JSON.stringify(this.props))
+    this.props.markCardAttempted(this.props);
   }
 
   componentDidMount(){

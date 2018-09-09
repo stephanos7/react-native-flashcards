@@ -1,5 +1,5 @@
 import React from 'react';
-import { View , FlatList } from 'react-native';
+import { Text, View , FlatList } from 'react-native';
 
 import styles from "./styles";
 import Card from "./components/Card";
@@ -26,6 +26,19 @@ export default class App extends React.Component {
   //   this.setState(() => ({data:copyOfData}));
   // }
 
+  markCardAttempted = (props) => {
+    const {data} = props;
+    data.attempted = true;
+    this.updateData(data);
+  }
+
+  updateData = (cardData) => {
+    const copyOfStateData = [...this.state.data];
+    copyOfStateData.reverse();
+    copyOfStateData.splice(cardData.index, 1, cardData);
+    this.setState({data:copyOfStateData});
+  }
+
   _renderItem = (item) => <Card animateSucces={this.animateSucces} {...item}/>
 
   render() {
@@ -33,6 +46,7 @@ export default class App extends React.Component {
     const headCard = copyOfData.shift();
     return (
       <View style={styles.container}>
+      <Text>{JSON.stringify(this.state.data)}</Text>
         <FlatList
             style={{padding:30}}
             data={this.state.data.reverse()}
@@ -41,7 +55,7 @@ export default class App extends React.Component {
             />
         <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between", margin:30}}>
           <ActionButton type="incorrect" />
-          <ActionButton type="correct" data={headCard} attemptItem={this.attemptItem} />
+          <ActionButton type="correct" data={headCard} markCardAttempted={this.markCardAttempted} />
         </View>
       </View>
     );
