@@ -61,6 +61,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: WHITE,
     borderRadius: 35,
+    alignSelf:"center",
+    width: "100%",
+    position:"absolute",
+    top:0,
     ...SHADOWS.vertical
   },
   endOfDeckContainer: {
@@ -75,7 +79,6 @@ export default StyleSheet.create({
     textAlign: "center"
   },
   question:{
-    color: DAVYS_GREY,
     ...FONTS.h2
   },
 });
