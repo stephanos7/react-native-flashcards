@@ -11,21 +11,29 @@ export default class App extends React.Component {
       {
         question:"JavaScript was being developed under the name Mocha.",
         attempted:"",
+        answer: "correct"
       },
       {
         question:"orange",
-        attempted:""
+        attempted:"",
+        answer: "incorrect"
       },
       {
         question:"lemon",
-        attempted:""
+        attempted:"",
+        answer: "correct"
       }
     ],
   }
 
-  markCardAttempted = (props) => {
-    const {data} = props;
-    data.attempted = "correct";
+  removeAttemptedCard = () => {
+    const copyOfStateData = [...this.state.data];
+    copyOfStateData.pop();
+    this.setState( () => ({data:copyOfStateData}));
+  }
+
+  attemptCard = (data, userResponse) => {
+    data.attempted = userResponse;
     this.updateData(data);
   }
 
@@ -36,8 +44,9 @@ export default class App extends React.Component {
     this.setState( () => ({data:copyOfStateData}));
   }
 
-  _renderItem = (item) => <Card animateSucces={this.animateSucces} {...item}/>
-
+  _renderItem = (item) => <Card {...item}
+                                animateSucces={this.animateSucces}
+                                removeAttemptedCard={this.removeAttemptedCard} />
   render() {
     const copyOfData = [...this.state.data];
     const headCard = copyOfData.shift();
@@ -50,8 +59,10 @@ export default class App extends React.Component {
             keyExtractor={(item,index)=> index.toString()}
             />
         <View style={styles.buttonsContainer}>
-          <ActionButton type="incorrect" />
-          <ActionButton type="correct" data={headCard} markCardAttempted={this.markCardAttempted} />
+          <ActionButton type="incorrect" data={headCard} attemptCard={this.attemptCard} />
+          <ActionButton type="correct" 
+                        data={headCard} 
+                        attemptCard={this.attemptCard} />
         </View>
       </View>
     );

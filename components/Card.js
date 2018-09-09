@@ -20,7 +20,7 @@ export default class Card extends React.Component {
         toValue: attempt === "correct" ? 400 : attempt === "incorrect" ? -400 : null,
         duration:350
       }
-    ).start();
+    ).start(() => this.props.removeAttemptedCard());
   }
 
   dropCardAnimation = () => {

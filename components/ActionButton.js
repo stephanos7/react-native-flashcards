@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Text,TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 
 import styles, {NON_PHOTO_BLUE, RASBERRY_PINK, FONTS} from "../styles";
@@ -10,8 +10,10 @@ export default class ActionButton extends React.Component {
     name: null,
   }
 
-  handlePress = () => {
-    this.props.markCardAttempted(this.props);
+  handlePress = (userResponse) => {
+    const {data} = this.props
+    console.log(userResponse)
+    this.props.attemptCard(data, userResponse);
   }
 
   componentDidMount(){
@@ -24,8 +26,9 @@ export default class ActionButton extends React.Component {
   }
 
   render(){
+    const {type} = this.props;
     return(
-      <TouchableOpacity style={[styles.actionButton, {...this.state.style}]} onPress={this.handlePress}>
+      <TouchableOpacity style={[styles.actionButton, {...this.state.style}]} onPress={() => this.handlePress(type)}>
         <Ionicons name={this.state.name} color="white" size={40} />
       </TouchableOpacity>
     )
