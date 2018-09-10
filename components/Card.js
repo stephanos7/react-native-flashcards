@@ -3,6 +3,7 @@ import { Text, View, Animated, TouchableOpacity } from 'react-native';
 
 import styles,{DAVYS_GREY,PEARL_AQUA,RUSTY_RED} from "../styles";
 import EyeIcon from "./EyeIcon";
+import {hideOverflow} from "../utils/helpers";
 
 export default class Card extends React.Component {
   state = {
@@ -58,10 +59,6 @@ export default class Card extends React.Component {
     this.setState( prevState => ({showingAnswer: !prevState.showingAnswer}))
   }
 
-  hideOverflow = () => {
-    return {overflow:"hidden"}
-  }
-
   render() {
     const {showingAnswer} = this.state;
     const {index, item} = this.props;
@@ -72,7 +69,7 @@ export default class Card extends React.Component {
     const rotationAnimation = {transform: [{rotate: rotation}]};
     const initialXAnimation = {left:this.x};
     const dynamicTopMarginStyle = { marginTop:(index+1)*8};
-    const conditionallyHideOverflowStyle = item.attempted !== "" ? this.hideOverflow() : null;
+    const conditionallyHideOverflowStyle = item.attempted !== "" ? hideOverflow() : null;
 
     return (
       <Animated.View style={[styles.card,rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
