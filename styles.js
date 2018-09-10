@@ -79,6 +79,11 @@ export default StyleSheet.create({
     ...FONTS.h2,
     textAlign: "center"
   },
+  eyeButton: {
+    alignSelf:"center",
+    position:"absolute",
+    bottom:30
+  },
   question: {
     textAlign:"center",
     ...FONTS.h2

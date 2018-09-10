@@ -1,11 +1,13 @@
 import React from 'react';
-import { Text, View, Animated, Button } from 'react-native';
+import { Text, View, Animated, TouchableOpacity } from 'react-native';
 
 import styles,{DAVYS_GREY,PEARL_AQUA,RUSTY_RED} from "../styles";
 import EyeIcon from "./EyeIcon";
-import FlipCard from 'react-native-flip-card'
 
 export default class Card extends React.Component {
+  state = {
+    showingAnswer : false
+  }
 
   componentWillMount(){
     this.x = new Animated.Value(0);
@@ -52,15 +54,8 @@ export default class Card extends React.Component {
     Animated.parallel(sequence).start(() => this.props.removeAttemptedCard());
   }
 
-  flipCard = () => {
-    Animated.spring(
-      this.flip,
-      {
-        toValue:180,
-        tension:50,
-        duration:2000
-      }
-    ).start();
+  toggleAnswer = () => {
+    this.setState( prevState => ({showingAnswer: !prevState.showingAnswer}))
   }
 
   hideOverflow = () => {
@@ -68,6 +63,7 @@ export default class Card extends React.Component {
   }
 
   render() {
+    const {showingAnswer} = this.state;
     const {index, item} = this.props;
     const rotation = this.x.interpolate({
       inputRange: [0, 200],
@@ -81,8 +77,10 @@ export default class Card extends React.Component {
     return (
       <Animated.View style={[styles.card,rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
         <Text style={[styles.question, item.attempted !== "" ? {color:"white",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Text>
-        <Button title="test" onPress={() => this.flipCard()} />
-        <EyeIcon />
+        {showingAnswer ? <Text>ANSWER</Text> : null}
+        <TouchableOpacity style={styles.eyeButton} onPress={() => this.toggleAnswer()}>
+          <EyeIcon />
+        </TouchableOpacity>
         <Animated.View style={[styles.radialAnimationDot,item.attempted !== item.answer? {backgroundColor:RUSTY_RED} :{backgroundColor:PEARL_AQUA},{ transform:[{scale:this.dotScale}], opacity:this.dotOpacity}]}/>
       </Animated.View>
     );
