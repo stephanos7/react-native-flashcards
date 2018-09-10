@@ -1,7 +1,9 @@
-import React, {shallowCompare} from 'react';
-import { Text, View, Animated } from 'react-native';
+import React from 'react';
+import { Text, View, Animated, Button } from 'react-native';
 
 import styles,{DAVYS_GREY,PEARL_AQUA,RUSTY_RED} from "../styles";
+import EyeIcon from "./EyeIcon";
+import FlipCard from 'react-native-flip-card'
 
 export default class Card extends React.Component {
 
@@ -9,6 +11,7 @@ export default class Card extends React.Component {
     this.x = new Animated.Value(0);
     this.dotOpacity = new Animated.Value(0);
     this.dotScale = new Animated.Value(1);
+    this.flip = new Animated.Value(0);
   }
 
   componentDidUpdate() {
@@ -40,13 +43,24 @@ export default class Card extends React.Component {
       Animated.spring(
         this.dotScale,
         {
-          toValue:60,
+          toValue:90,
           tension:50,
           duration:600
         }
       )
     ];
     Animated.parallel(sequence).start(() => this.props.removeAttemptedCard());
+  }
+
+  flipCard = () => {
+    Animated.spring(
+      this.flip,
+      {
+        toValue:180,
+        tension:50,
+        duration:2000
+      }
+    ).start();
   }
 
   hideOverflow = () => {
@@ -59,9 +73,16 @@ export default class Card extends React.Component {
       inputRange: [0, 200],
       outputRange: ['0deg', '45deg']
     })
+    const rotationAnimation = {transform: [{rotate: rotation}]};
+    const initialXAnimation = {left:this.x};
+    const dynamicTopMarginStyle = { marginTop:(index+1)*8};
+    const conditionallyHideOverflowStyle = item.attempted !== "" ? this.hideOverflow() : null;
+
     return (
-      <Animated.View style={[styles.card, item.attempted !== "" && this.hideOverflow(), {left:this.x, transform: [{rotate: rotation}], marginTop:(index+1)*8}]}>
+      <Animated.View style={[styles.card,rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
         <Text style={[styles.question, item.attempted !== "" ? {color:"white",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Text>
+        <Button title="test" onPress={() => this.flipCard()} />
+        <EyeIcon />
         <Animated.View style={[styles.radialAnimationDot,item.attempted !== item.answer? {backgroundColor:RUSTY_RED} :{backgroundColor:PEARL_AQUA},{ transform:[{scale:this.dotScale}], opacity:this.dotOpacity}]}/>
       </Animated.View>
     );
