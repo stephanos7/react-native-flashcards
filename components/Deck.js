@@ -3,9 +3,8 @@ import { Text, View , FlatList } from 'react-native';
 
 import styles from "../styles";
 import Card from "./Card";
-import ActionButton from './ActionButton';
+import ActionButton from "./ActionButton";
 import Counter from "./Counter";
-
 
 export default class Deck extends React.Component {
   state = {

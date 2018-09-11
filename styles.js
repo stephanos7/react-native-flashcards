@@ -81,7 +81,7 @@ export default StyleSheet.create({
   card : {
     display:"flex",
     padding:20,
-    minHeight:420,
+    minHeight:350,
     justifyContent: 'center',
     backgroundColor: WHITE,
     borderRadius: 35,

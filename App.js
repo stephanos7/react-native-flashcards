@@ -4,7 +4,7 @@ import {createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 
 import styles from "./styles";
 import Deck from "./components/Deck";
-
+import List from "./components/List";
 
 export default class App extends React.Component {
   render() {
@@ -14,32 +14,26 @@ export default class App extends React.Component {
   }
 }
 
-class HomeView extends React.Component {
-  render(){
-    return(
-      <View style={styles.container}>
-        <Text>home</Text>
-      </View>
-    )
-  }
-}
-
-export const specificDeckNavigation = createStackNavigator({
-  HomeView: {
-    screen: (props) => (<Deck />)
+const specificDeckNavigation = createStackNavigator({
+  DeckView: {
+    screen: (props) => (<Deck {...props}/>),
+    navigationOptions: ({navigation}) => ({
+      headerTitle: "title",
+      // header: null
+      })
   }
 });
 
-export const TabNav = createBottomTabNavigator({
+const TabNav = createBottomTabNavigator({
   Home: {
-    screen: props => (<HomeView {...props} />),
+    screen: props => (<List {...props} />),
   },
   Decks: {
     screen: specificDeckNavigation,
-    // navigationOptions: () => ({
-    //   headerTitle: "specific deck"
-    //   })
-  }
+    navigationOptions: ({navigation}) => ({
+      tabBarVisible: false,
+      })
+    }
   },
   {
   tabBarOptions: {
