@@ -9,7 +9,8 @@ import Counter from "./components/Counter";
 
 export default class App extends React.Component {
   state = {
-    score: 1,
+    score: 0,
+    totalItems:0,
     data:[
       {
         question:"JavaScript was being developed under the name Mocha.",
@@ -41,15 +42,17 @@ export default class App extends React.Component {
     this.updateData(data, this.updateScore);
   }
 
-  updateScore = () => {
-    this.setState(prevState => ({score: prevState.score +1}));
+  updateScore = (cardData) => {
+    if(cardData.attempted === cardData.answer){
+      this.setState(prevState => ({score: prevState.score +1}));
+    }
   }
 
   updateData = (cardData, cbToUpdateScore) => {
     const copyOfStateData = [...this.state.data];
     const removeLastVerstionOfItem = copyOfStateData.filter( item => item.question !== cardData.question)
     const addLatestVersionOfItem = removeLastVerstionOfItem.concat(cardData);
-    this.setState(() => ({data:copyOfStateData}),cbToUpdateScore());
+    this.setState(() => ({data:copyOfStateData}),cbToUpdateScore(cardData));
   }
 
   renderEndOfDeck = () => {
@@ -63,6 +66,11 @@ export default class App extends React.Component {
   _renderItem = (item) => <Card {...item}
                                 animateSucces={this.animateSucces}
                                 removeAttemptedCard={this.removeAttemptedCard} />
+
+  componentDidMount() {
+    this.setState( () => ({totalItems:this.state.data.length}))
+  }
+  
   render() {
     const {data} = this.state
     const copyOfData = [...this.state.data];
@@ -74,7 +82,7 @@ export default class App extends React.Component {
               style={{padding:30}}
               data={this.state.data}
               renderItem={this._renderItem}
-              keyExtractor={(item,index)=> index.toString()}
+              keyExtractor={(item,index) => index.toString()}
               />
         : this.renderEndOfDeck() }
         <View style={styles.buttonsContainer}>
@@ -82,7 +90,7 @@ export default class App extends React.Component {
                         data={headCard} 
                         attemptCard={this.attemptCard}
                         handleEndOfDeck={this.handleEndOfDeck} />
-          <Counter score={this.state.score} />
+          <Counter score={this.state.score} total={this.state.totalItems} />
           <ActionButton type="correct" 
                         data={headCard} 
                         attemptCard={this.attemptCard}
