@@ -38,6 +38,14 @@ export const SHADOWS = {
     },
     shadowOpacity: 0.3,
     shadowRadius: 1.6
+  },
+  halo: {
+    shadowColor: PEARL_AQUA,
+    shadowOffset: {
+      width: 0, height: 0
+    },
+    shadowOpacity: 1,
+    shadowRadius: 10
   }
 }
 
@@ -86,11 +94,12 @@ export default StyleSheet.create({
   counter: {
     alignItems:"center",
     justifyContent:"center",
+    backgroundColor: WHITE,
     borderRadius:50,
     width:45,
     height:45,
     paddingTop:1,
-    backgroundColor:"grey"
+    ...SHADOWS.halo
   },
   endOfDeckContainer: {
     minHeight: 420,

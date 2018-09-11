@@ -42,10 +42,14 @@ export default class App extends React.Component {
     this.updateData(data, this.updateScore);
   }
 
-  updateScore = (cardData) => {
+  updateScore = (cardData, cbToCelebrate) => {
     if(cardData.attempted === cardData.answer){
       this.setState(prevState => ({score: prevState.score +1}));
     }
+  }
+
+  celebrate = () => {
+    alert("celebrate!")
   }
 
   updateData = (cardData, cbToUpdateScore) => {
