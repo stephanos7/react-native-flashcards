@@ -11,6 +11,7 @@ export default class Card extends React.Component {
   }
 
   toggleAnswer = () => {
+    this.animatedDotSequence();
     this.setState( prevState => ({showingAnswer: !prevState.showingAnswer}))
   }
 
@@ -28,12 +29,19 @@ export default class Card extends React.Component {
     const { attempted, answer } = this.props.item;
     const sequence = [
       this.determineSwipeConfig(attempted, this.x, answer),
-      this.animatedDotOpacity(),
-      this.animateDotScaleUp()
+      this.animatedDotSequence()
     ];
     Animated.parallel(sequence).start(() => this.props.removeAttemptedCard());
   }
-    animatedDotOpacity(){
+
+  animatedDotSequence = () => {
+    Animated.sequence([
+      this.animatedDotOpacity(),
+      this.animateDotScaleUp()
+    ])
+  }
+
+  animatedDotOpacity(){
       Animated.timing(
         this.dotOpacity,
         {
@@ -41,8 +49,9 @@ export default class Card extends React.Component {
           duration:100
         }
       ).start()
-    }
-    animateDotScaleUp(){
+  }
+
+  animateDotScaleUp(){
       Animated.spring(
         this.dotScale,
         {
@@ -51,7 +60,7 @@ export default class Card extends React.Component {
           duration:600
         }
       ).start()
-    }
+  }
 
   componentWillMount(){
     this.x = new Animated.Value(0);
@@ -77,9 +86,12 @@ export default class Card extends React.Component {
     const scaleDotAnimation = {transform:[{scale:this.dotScale}]};
     const initialXAnimation = {left:this.x};
     const dynamicTopMarginStyle = { marginTop:(index+1)*8};
-    const conditionallyHideOverflowStyle = item.attempted !== "" ? hideOverflow() : null;
+    const conditionallyHideOverflowStyle = item.attempted !== "" || showingAnswer ? hideOverflow() : null;
     const conditionallyJustifyCardContents = showingAnswer ? {justifyContent: 'flex-start'} : {justifyContent: 'center'}
-
+    const conditionallySetDotAnimationColor = item.attempted !== item.answer && showingAnswer === true ? {opacity:1,backgroundColor:"grey"}
+                                                : item.attempted === item.answer ? {backgroundColor:PEARL_AQUA}
+                                                  : item.attempted !== item.answer ? {backgroundColor:RUSTY_RED} 
+                                                    : null
     return (
       <Animated.View style={[styles.card, conditionallyJustifyCardContents, rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
         <Animated.Text style={[styles.question, item.attempted !== "" ? {color:"white",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Animated.Text>
@@ -87,7 +99,7 @@ export default class Card extends React.Component {
         <TouchableOpacity style={styles.eyeButton} onPress={() => this.toggleAnswer()}>
           <EyeIcon />
         </TouchableOpacity>
-        <Animated.View style={[styles.radialAnimationDot, scaleDotAnimation, item.attempted !== item.answer? {backgroundColor:RUSTY_RED} :{backgroundColor:PEARL_AQUA},{opacity:this.dotOpacity}]}/>
+        <Animated.View style={[styles.radialAnimationDot, scaleDotAnimation, conditionallySetDotAnimationColor ,{opacity:this.dotOpacity}]}/>
       </Animated.View>
     );
   }
