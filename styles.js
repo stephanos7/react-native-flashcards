@@ -39,6 +39,14 @@ export const SHADOWS = {
     shadowOpacity: 0.3,
     shadowRadius: 1.6
   },
+  wide: {
+    shadowColor: DAVYS_GREY,
+    shadowOffset: {
+      width: 8, height: 0
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 12
+  },
   halo: {
     shadowColor: PEARL_AQUA,
     shadowOffset: {
@@ -116,6 +124,16 @@ export default StyleSheet.create({
     alignSelf:"center",
     position:"absolute",
     bottom:30
+  },
+  listitem: {
+    flex:1,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    backgroundColor:WHITE,
+    padding:25,
+    marginBottom:30,
+    ...SHADOWS.wide
   },
   question: {
     textAlign: "center",

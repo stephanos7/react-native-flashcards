@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import styles from "../styles";
+import styles, { PEARL_AQUA } from "../styles";
 import {calcPercentage} from "../utils/helpers";
 
 export default class Counter extends React.Component {
@@ -10,7 +10,7 @@ export default class Counter extends React.Component {
     const percentageScore = calcPercentage(score,total);
     return(
       <View style={styles.counter}>
-        <Text>{percentageScore}%</Text>
+        <Text style={{color:PEARL_AQUA}}>{percentageScore}%</Text>
       </View>
     )
   }

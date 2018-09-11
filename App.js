@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View , FlatList } from 'react-native';
 import {createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 
-import styles from "./styles";
+import styles, {RASBERRY_PINK} from "./styles";
 import Deck from "./components/Deck";
 import List from "./components/List";
 
@@ -28,7 +28,7 @@ const TabNav = createBottomTabNavigator({
   Home: {
     screen: props => (<List {...props} />),
   },
-  Decks: {
+  "Create New": {
     screen: specificDeckNavigation,
     navigationOptions: ({navigation}) => ({
       tabBarVisible: false,
@@ -38,7 +38,8 @@ const TabNav = createBottomTabNavigator({
   {
   tabBarOptions: {
     initialRouteName: "Home",
-    activeTintColor: '#e91e63',
+    backBehavior: true,
+    activeTintColor: RASBERRY_PINK,
   }
 })
 
