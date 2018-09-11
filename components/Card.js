@@ -10,16 +10,8 @@ export default class Card extends React.Component {
     showingAnswer : false
   }
 
-  componentWillMount(){
-    this.x = new Animated.Value(0);
-    this.dotOpacity = new Animated.Value(0);
-    this.dotScale = new Animated.Value(1);
-    this.flip = new Animated.Value(0);
-  }
-
-  componentDidUpdate() {
-    this.props.item.attempted !== "" && 
-    this.swipeCardAnimation();
+  toggleAnswer = () => {
+    this.setState( prevState => ({showingAnswer: !prevState.showingAnswer}))
   }
 
   determineSwipeConfig = (attempt, startValue, answer) => {
@@ -36,13 +28,21 @@ export default class Card extends React.Component {
     const { attempted, answer } = this.props.item;
     const sequence = [
       this.determineSwipeConfig(attempted, this.x, answer),
+      this.animatedDotOpacity(),
+      this.animateDotScaleUp()
+    ];
+    Animated.parallel(sequence).start(() => this.props.removeAttemptedCard());
+  }
+    animatedDotOpacity(){
       Animated.timing(
         this.dotOpacity,
         {
           toValue: 1,
           duration:100
         }
-      ),
+      ).start()
+    }
+    animateDotScaleUp(){
       Animated.spring(
         this.dotScale,
         {
@@ -50,13 +50,20 @@ export default class Card extends React.Component {
           tension:50,
           duration:600
         }
-      )
-    ];
-    Animated.parallel(sequence).start(() => this.props.removeAttemptedCard());
+      ).start()
+    }
+
+  componentWillMount(){
+    this.x = new Animated.Value(0);
+    this.dotOpacity = new Animated.Value(0);
+    this.dotScale = new Animated.Value(1);
+    this.flip = new Animated.Value(0);
+    this.fontScale = new Animated.Value(1);
   }
 
-  toggleAnswer = () => {
-    this.setState( prevState => ({showingAnswer: !prevState.showingAnswer}))
+  componentDidUpdate() {
+    this.props.item.attempted !== "" && 
+    this.swipeCardAnimation();
   }
 
   render() {
@@ -67,18 +74,20 @@ export default class Card extends React.Component {
       outputRange: ['0deg', '45deg']
     })
     const rotationAnimation = {transform: [{rotate: rotation}]};
+    const scaleDotAnimation = {transform:[{scale:this.dotScale}]};
     const initialXAnimation = {left:this.x};
     const dynamicTopMarginStyle = { marginTop:(index+1)*8};
     const conditionallyHideOverflowStyle = item.attempted !== "" ? hideOverflow() : null;
+    const conditionallyJustifyCardContents = showingAnswer ? {justifyContent: 'flex-start'} : {justifyContent: 'center'}
 
     return (
-      <Animated.View style={[styles.card,rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
-        <Text style={[styles.question, item.attempted !== "" ? {color:"white",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Text>
+      <Animated.View style={[styles.card, conditionallyJustifyCardContents, rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
+        <Animated.Text style={[styles.question, item.attempted !== "" ? {color:"white",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Animated.Text>
         {showingAnswer ? <Text>ANSWER</Text> : null}
         <TouchableOpacity style={styles.eyeButton} onPress={() => this.toggleAnswer()}>
           <EyeIcon />
         </TouchableOpacity>
-        <Animated.View style={[styles.radialAnimationDot,item.attempted !== item.answer? {backgroundColor:RUSTY_RED} :{backgroundColor:PEARL_AQUA},{ transform:[{scale:this.dotScale}], opacity:this.dotOpacity}]}/>
+        <Animated.View style={[styles.radialAnimationDot, scaleDotAnimation, item.attempted !== item.answer? {backgroundColor:RUSTY_RED} :{backgroundColor:PEARL_AQUA},{opacity:this.dotOpacity}]}/>
       </Animated.View>
     );
   }

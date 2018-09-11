@@ -57,6 +57,7 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
   },
   card : {
+    display:"flex",
     padding:20,
     minHeight:420,
     justifyContent: 'center',
@@ -85,7 +86,7 @@ export default StyleSheet.create({
     bottom:30
   },
   question: {
-    textAlign:"center",
+    textAlign: "center",
     ...FONTS.h2
   },
   radialAnimationDot: {
