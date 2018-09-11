@@ -105,7 +105,7 @@ export default class Card extends React.Component {
     
     return (
       <Animated.View style={[styles.card, rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
-        <Animated.Text style={[styles.question, (item.attempted !== "" || showingAnswer) ? {color:"lightgrey",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Animated.Text>
+        <Animated.Text style={[styles.question, showingAnswer ? {zIndex:2} : null, (showingAnswer && item.attempted === "") ? {color:"lightgrey"} :{color: DAVYS_GREY}]}>{this.props.item.question}</Animated.Text>
         {showingAnswer ? <Text style={[styles.answer, zIndex]} >{item.answer} {this.conditionallyRenderThumbEmoji()}</Text> : null}
         <TouchableOpacity style={styles.eyeButton} onPress={() => this.toggleAnswer()}>
           <EyeIcon showingAnswer={showingAnswer} />
