@@ -21,6 +21,12 @@ export const FONTS = {
   },
   h2: {
     fontSize: 28
+  },
+  h3: {
+    fontSize: 24
+  },
+  h4: {
+    fontSize: 18
   }
 }
 
@@ -54,6 +60,7 @@ export default StyleSheet.create({
   buttonsContainer: {
     display:"flex",
     flexDirection:"row",
+    alignItems: "center",
     justifyContent:"space-between",
     margin:40,
     paddingLeft:40,
@@ -75,6 +82,15 @@ export default StyleSheet.create({
     position:"absolute",
     top:0,
     ...SHADOWS.vertical
+  },
+  counter: {
+    alignItems:"center",
+    justifyContent:"center",
+    borderRadius:50,
+    width:45,
+    height:45,
+    paddingTop:1,
+    backgroundColor:"grey"
   },
   endOfDeckContainer: {
     minHeight: 420,

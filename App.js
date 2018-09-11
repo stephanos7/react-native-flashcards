@@ -4,9 +4,12 @@ import { Text, View , FlatList } from 'react-native';
 import styles from "./styles";
 import Card from "./components/Card";
 import ActionButton from './components/ActionButton';
+import Counter from "./components/Counter";
+
 
 export default class App extends React.Component {
   state = {
+    score: 1,
     data:[
       {
         question:"JavaScript was being developed under the name Mocha.",
@@ -32,17 +35,21 @@ export default class App extends React.Component {
     this.setState( () => ({data:copyOfStateData}));
   }
 
+
   attemptCard = (data, userResponse) => {
     data.attempted = userResponse;
-    this.updateData(data);
+    this.updateData(data, this.updateScore);
   }
 
-  updateData = (cardData) => {
+  updateScore = () => {
+    this.setState(prevState => ({score: prevState.score +1}));
+  }
+
+  updateData = (cardData, cbToUpdateScore) => {
     const copyOfStateData = [...this.state.data];
     const removeLastVerstionOfItem = copyOfStateData.filter( item => item.question !== cardData.question)
     const addLatestVersionOfItem = removeLastVerstionOfItem.concat(cardData);
-    this.setState(() => ({data:copyOfStateData}));
-    
+    this.setState(() => ({data:copyOfStateData}),cbToUpdateScore());
   }
 
   renderEndOfDeck = () => {
@@ -75,6 +82,7 @@ export default class App extends React.Component {
                         data={headCard} 
                         attemptCard={this.attemptCard}
                         handleEndOfDeck={this.handleEndOfDeck} />
+          <Counter score={this.state.score} />
           <ActionButton type="correct" 
                         data={headCard} 
                         attemptCard={this.attemptCard}
