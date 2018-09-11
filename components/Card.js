@@ -62,6 +62,16 @@ export default class Card extends React.Component {
       ).start()
   }
 
+  conditionallyRenderThumbEmoji = () => {
+    const {item} = this.props;
+    if(item.answer === "correct"){
+      return(<Text>👍</Text>)
+    }
+    if(item.answer === "incorrect"){
+      return(<Text>👎</Text>)
+    }
+  } 
+
   componentWillMount(){
     this.x = new Animated.Value(0);
     this.dotOpacity = new Animated.Value(0);
@@ -85,19 +95,20 @@ export default class Card extends React.Component {
     const rotationAnimation = {transform: [{rotate: rotation}]};
     const scaleDotAnimation = {transform:[{scale:this.dotScale}]};
     const initialXAnimation = {left:this.x};
+    const zIndex = showingAnswer ? {zIndex:2} : null
     const dynamicTopMarginStyle = { marginTop:(index+1)*8};
     const conditionallyHideOverflowStyle = item.attempted !== "" || showingAnswer ? hideOverflow() : null;
-    const conditionallyJustifyCardContents = showingAnswer ? {justifyContent: 'flex-start'} : {justifyContent: 'center'}
-    const conditionallySetDotAnimationColor = item.attempted !== item.answer && showingAnswer === true ? {opacity:1,backgroundColor:"grey"}
+    const conditionallySetDotAnimationColor = item.attempted === "" && showingAnswer === true ? {opacity:1, backgroundColor:DAVYS_GREY}
                                                 : item.attempted === item.answer ? {backgroundColor:PEARL_AQUA}
                                                   : item.attempted !== item.answer ? {backgroundColor:RUSTY_RED} 
-                                                    : null
+                                                    : null;
+    
     return (
-      <Animated.View style={[styles.card, conditionallyJustifyCardContents, rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
-        <Animated.Text style={[styles.question, item.attempted !== "" ? {color:"white",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Animated.Text>
-        {showingAnswer ? <Text>ANSWER</Text> : null}
+      <Animated.View style={[styles.card, rotationAnimation, initialXAnimation, dynamicTopMarginStyle, conditionallyHideOverflowStyle]}>
+        <Animated.Text style={[styles.question, (item.attempted !== "" || showingAnswer) ? {color:"lightgrey",zIndex:2}:{color: DAVYS_GREY}]}>{this.props.item.question}</Animated.Text>
+        {showingAnswer ? <Text style={[styles.answer, zIndex]} >{item.answer} {this.conditionallyRenderThumbEmoji()}</Text> : null}
         <TouchableOpacity style={styles.eyeButton} onPress={() => this.toggleAnswer()}>
-          <EyeIcon />
+          <EyeIcon showingAnswer={showingAnswer} />
         </TouchableOpacity>
         <Animated.View style={[styles.radialAnimationDot, scaleDotAnimation, conditionallySetDotAnimationColor ,{opacity:this.dotOpacity}]}/>
       </Animated.View>

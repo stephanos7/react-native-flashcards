@@ -44,6 +44,13 @@ export default StyleSheet.create({
     height:60,
     paddingTop:5
   },
+  answer:{
+    paddingTop:20,
+    paddingBottom:20,
+    color: WHITE,
+    textAlign: "center",
+    ...FONTS.h2
+  },
   buttonsContainer: {
     display:"flex",
     flexDirection:"row",
