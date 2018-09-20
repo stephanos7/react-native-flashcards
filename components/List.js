@@ -9,7 +9,7 @@ export default class List extends React.Component {
     decks:[{id:1, title:"apples"},{id:2, title:"lemons"},{id:3, title:"oranges"},{id:4, title:"peaches"}]
   }
 
-  _renderItem = (item) => <ListItem {...item} />
+  _renderItem = (item) => <ListItem {...this.props} {...item} />
 
   render(){
     return(

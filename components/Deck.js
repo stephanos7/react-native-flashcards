@@ -88,7 +88,7 @@ export default class Deck extends React.Component {
               keyExtractor={(item,index) => index.toString()}
               />
         : this.renderEndOfDeck() }
-        <View style={styles.buttonsContainer}>
+        <View style={styles.actionButtonsContainer}>
           <ActionButton type="incorrect" 
                         data={headCard} 
                         attemptCard={this.attemptCard}

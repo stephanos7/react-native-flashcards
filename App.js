@@ -5,6 +5,7 @@ import {createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 import styles, {RASBERRY_PINK} from "./styles";
 import Deck from "./components/Deck";
 import List from "./components/List";
+import StartDeck from "./components/StartDeck";
 
 export default class App extends React.Component {
   render() {
@@ -15,19 +16,34 @@ export default class App extends React.Component {
 }
 
 const specificDeckNavigation = createStackNavigator({
+  Home: {
+    screen: props => (<List {...props} />),
+    navigationOptions: ({navigation}) => ({
+      headerTitle: "Home",
+      })
+  },
+  Start: {
+    screen: props => (<StartDeck {...props} />),
+    navigationOptions: ({navigation}) => ({
+      headerTitle: "title",
+      })
+  },
   DeckView: {
     screen: (props) => (<Deck {...props}/>),
     navigationOptions: ({navigation}) => ({
-      headerTitle: "title",
+      headerTitle: "Deck",
       // header: null
       })
   }
 });
 
 const TabNav = createBottomTabNavigator({
-  Home: {
-    screen: props => (<List {...props} />),
-  },
+  "Home": {
+    screen: specificDeckNavigation,
+    navigationOptions: ({navigation}) => ({
+      tabBarVisible: false,
+      })
+    },
   "Create New": {
     screen: specificDeckNavigation,
     navigationOptions: ({navigation}) => ({

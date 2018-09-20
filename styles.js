@@ -73,7 +73,7 @@ export default StyleSheet.create({
     textAlign: "center",
     ...FONTS.h2
   },
-  buttonsContainer: {
+  actionButtonsContainer: {
     display:"flex",
     flexDirection:"row",
     alignItems: "center",
@@ -99,12 +99,27 @@ export default StyleSheet.create({
     top:0,
     ...SHADOWS.vertical
   },
+  choiceButtonsContainer : {
+    display:"flex",
+    alignItems: "center",
+    margin:40,
+    paddingLeft:40,
+    paddingRight:40
+  },
+  choiceButton : {
+    alignItems: "center",
+    justifyContent:"center",
+    backgroundColor:WHITE,
+    width: 150,
+    height:50,
+    marginBottom:30,
+    ...SHADOWS.wide
+  },
   counter: {
     alignItems:"center",
     justifyContent:"center",
     backgroundColor: WHITE,
     borderRadius:50,
-    width:45,
     height:45,
     paddingTop:1,
     ...SHADOWS.halo
