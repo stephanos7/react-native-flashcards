@@ -10,7 +10,9 @@ export default class StartDeck extends React.Component {
     return(
         <View style={styles.container}>
           <View style={styles.choiceButtonsContainer}>
-            <ChoiceButton title={"hello?"} />
+            <ChoiceButton title={"Add New Card"} />
+            <ChoiceButton title={"Start Deck"} />
+            <Text>{JSON.stringify(this.props)}</Text>
           </View>
         </View>
     )

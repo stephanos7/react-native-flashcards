@@ -25,7 +25,7 @@ const specificDeckNavigation = createStackNavigator({
   Start: {
     screen: props => (<StartDeck {...props} />),
     navigationOptions: ({navigation}) => ({
-      headerTitle: "title",
+      headerTitle: navigation.state.params.title,
       })
   },
   DeckView: {

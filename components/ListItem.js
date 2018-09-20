@@ -8,7 +8,7 @@ export default class ListItem extends React.Component {
   render(){
     const {item, navigation, name} = this.props;
     return(
-      <TouchableOpacity onPress={() => navigation.navigate("Start")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Start", item)}>
         <View style={styles.listitem}>
           <Text>{item ? item.title : null}</Text>
           <Ionicons name={"ios-arrow-round-forward"} color={DAVYS_GREY} size={28}/>
