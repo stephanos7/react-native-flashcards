@@ -110,7 +110,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent:"center",
     backgroundColor:WHITE,
-    width: 150,
+    minWidth: 150,
     height:50,
     marginBottom:30,
     ...SHADOWS.wide
@@ -120,7 +120,8 @@ export default StyleSheet.create({
     justifyContent:"center",
     backgroundColor: WHITE,
     borderRadius:50,
-    height:45,
+    height:50,
+    width:50,
     paddingTop:1,
     ...SHADOWS.halo
   },
