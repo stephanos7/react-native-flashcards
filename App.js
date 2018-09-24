@@ -5,7 +5,8 @@ import {createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 import styles, {RASBERRY_PINK} from "./styles";
 import Deck from "./components/Deck";
 import List from "./components/List";
-import StartDeck from "./components/StartDeck";
+import StartDeckView from "./components/StartDeckView";
+import AddCardView from "./components/StartDeckView";
 
 export default class App extends React.Component {
   render() {
@@ -15,7 +16,7 @@ export default class App extends React.Component {
   }
 }
 
-const specificDeckNavigation = createStackNavigator({
+const startDeckNavigation = createStackNavigator({
   Home: {
     screen: props => (<List {...props} />),
     navigationOptions: ({navigation}) => ({
@@ -23,7 +24,7 @@ const specificDeckNavigation = createStackNavigator({
       })
   },
   Start: {
-    screen: props => (<StartDeck {...props} />),
+    screen: props => (<StartDeckView {...props} />),
     navigationOptions: ({navigation}) => ({
       headerTitle: navigation.state.params.title,
       })
@@ -37,19 +38,29 @@ const specificDeckNavigation = createStackNavigator({
   }
 });
 
-const TabNav = createBottomTabNavigator({
-  "Home": {
-    screen: specificDeckNavigation,
+const newCardNavigation = createStackNavigator({
+  addTitle: {
+    screen: (props) => (<AddCardView />),
     navigationOptions: ({navigation}) => ({
       tabBarVisible: false,
       })
     },
-  "Create New": {
-    screen: specificDeckNavigation,
+
+});
+
+const TabNav = createBottomTabNavigator({
+  "Home": {
+    screen: startDeckNavigation,
     navigationOptions: ({navigation}) => ({
-      tabBarVisible: false,
+      tabBarVisible: true,
       })
-    }
+    },
+  "Create New": {
+    screen: newCardNavigation,
+    navigationOptions: ({navigation}) => ({
+      tabBarVisible: true,
+      })
+    }  
   },
   {
   tabBarOptions: {

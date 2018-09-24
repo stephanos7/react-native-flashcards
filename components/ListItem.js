@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 
-import styles, {SHADOWS, DAVYS_GREY} from "../styles";
+import styles, {DAVYS_GREY} from "../styles";
 
 export default class ListItem extends React.Component {
   render(){

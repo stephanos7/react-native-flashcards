@@ -1,11 +1,10 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { Ionicons } from "@expo/vector-icons";
+import {View, TouchableOpacity } from 'react-native';
 
-import styles, {SHADOWS, DAVYS_GREY} from "../styles";
+import styles from "../styles";
 import ChoiceButton from './ChoiceButton';
 
-export default class StartDeck extends React.Component {
+export default class StartDeckView extends React.Component {
   render(){
     return(
         <View style={styles.container}>

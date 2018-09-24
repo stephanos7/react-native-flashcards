@@ -11,7 +11,7 @@ export default class ChoiceButton extends React.Component {
 
   determineRoute = (buttonTitle) => {
     if(buttonTitle === "Add New Card"){
-      return "Home"
+      return "CreateNew"
     }
     if(buttonTitle === "Start Deck"){
       return "DeckView";
