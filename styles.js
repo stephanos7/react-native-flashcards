@@ -159,5 +159,17 @@ export default StyleSheet.create({
     borderRadius:50,
     width:10,
     height:10
+  },
+  textInput: {
+    padding:15,
+    color:DAVYS_GREY,
+    textAlign:"center",
+    width: 250,
+    marginBottom:30,
+    marginTop: 30,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: PEARL_AQUA,
+    ...FONTS.h3
   }
 });

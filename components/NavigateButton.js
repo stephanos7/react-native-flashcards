@@ -3,10 +3,11 @@ import {Text, TouchableOpacity } from 'react-native';
 
 import styles from "../styles";
 
-export default class ChoiceButton extends React.Component {
+export default class NavigateButton extends React.Component {
   handlePress = (title) => {
     const routeToFollow = this.determineRoute(title);
-    this.props.navigation.navigate(routeToFollow);
+    console.log(routeToFollow)
+    this.props.navigation.navigate(routeToFollow)
   }
 
   determineRoute = (buttonTitle) => {
@@ -15,6 +16,9 @@ export default class ChoiceButton extends React.Component {
     }
     if(buttonTitle === "Start Deck"){
       return "DeckView";
+    }
+    if(buttonTitle === "Add Title"){
+      return "AddCard";
     }
   }
 

@@ -6,7 +6,8 @@ import styles, {RASBERRY_PINK} from "./styles";
 import Deck from "./components/Deck";
 import List from "./components/List";
 import StartDeckView from "./components/StartDeckView";
-import AddCardView from "./components/StartDeckView";
+import AddTitleView from "./components/AddTitleView";
+import AddCardView from "./components/AddCardView";
 
 export default class App extends React.Component {
   render() {
@@ -39,13 +40,18 @@ const startDeckNavigation = createStackNavigator({
 });
 
 const newCardNavigation = createStackNavigator({
-  addTitle: {
-    screen: (props) => (<AddCardView />),
+  AddTitle: {
+    screen: props => (<AddTitleView {...props} />),
     navigationOptions: ({navigation}) => ({
       tabBarVisible: false,
       })
     },
-
+  AddCard: {
+      screen: props => (<AddCardView {...props} />),
+      navigationOptions: ({navigation}) => ({
+        tabBarVisible: false,
+        })
+    }
 });
 
 const TabNav = createBottomTabNavigator({

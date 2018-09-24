@@ -5,14 +5,14 @@ import styles from "../styles";
 import NavigateButton from './NavigateButton';
 import TitleInput from "./TitleInput";
 
-export default class AddCardView extends React.Component {
+export default class AddTitleView extends React.Component {
   render(){
     return(
         <View style={styles.container}>
           <View style={[styles.choiceButtonsContainer, {flexDirection:"column"}]}>
-          <Text style={styles.question}>Add a fact</Text>
-          <TitleInput multiline={true} />
-          <NavigateButton {...this.props} title={"Add Card"} />
+          <Text style={styles.question}>Add a title to your card deck</Text>
+          <TitleInput multiline={false} />
+          <NavigateButton {...this.props} title={"Add Title"} />
           </View>
         </View>
     )
