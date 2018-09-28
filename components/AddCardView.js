@@ -10,7 +10,7 @@ export default class AddCardView extends React.Component {
     return(
         <View style={styles.container}>
           <View style={[styles.choiceButtonsContainer, {flexDirection:"column"}]}>
-          <Text style={styles.question}>Add a fact</Text>
+          <Text style={styles.question}>Add a fact on your Card</Text>
           <TitleInput multiline={true} />
           <NavigateButton {...this.props} title={"Add Card"} />
           </View>

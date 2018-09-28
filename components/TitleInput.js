@@ -7,6 +7,7 @@ export default class TitleInput extends React.Component {
   state = {
     text : ""
   }
+
   render(){
     const {multiline} = this.props;
     return(
