@@ -13,7 +13,9 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "jest": {
     "preset": "jest-expo"
@@ -21,8 +23,10 @@
   "dependencies": {
     "expo": "^27.0.1",
     "react": "16.3.1",
-    "react-native": "~0.60.0",
+    "react-native": "~0.65.0",
     "react-navigation": "^2.13.0",
-    "react-spring": "^5.7.1"
-  }
+    "react-spring": "^5.7.1",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
